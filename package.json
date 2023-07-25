@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+    "serverstartmac": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
+    "serverstartwin": "SET DEBUG=express-locallibrary-tutorial:* & npm run devstart"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
