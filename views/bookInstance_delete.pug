@@ -1,13 +1,11 @@
 extends layout
 
 block content
-
-  h1 ID: #{bookInstance._id}
+  h1 #{title} #{bookInstance._id}
 
   p #[strong Title:] 
     a(href=bookInstance.book.url) #{bookInstance.book.title}
   p #[strong Imprint:] #{bookInstance.imprint}
-
   p #[strong Status:] 
     if bookInstance.status=='Available'
       span.text-success #{bookInstance.status}
@@ -16,11 +14,10 @@ block content
     else
       span.text-warning #{bookInstance.status}
 
-  if bookInstance.status!='Available'
-    p #[strong Due back:] #{bookInstance.due_back_formatted}
+  p Do you really want to delete this Book Instance?
 
-  hr
-  p
-    a(href=bookInstance.url+'/delete') Delete Book Instance
-  p
-    a(href=bookInstance.url+'/update') Update Book Instance
+  form(method='POST' action='')
+    div.form-group
+    input#bookInstanceId.form-control(type='hidden',name='bookInstanceId', required='true', value=bookInstance._id )
+
+    button.btn.btn-primary(type='submit') Delete

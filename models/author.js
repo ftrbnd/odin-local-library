@@ -28,10 +28,19 @@ AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
 });
 
+// Virtual for author form
+AuthorSchema.virtual('date_of_birth_yyyy_mm_dd').get(function () {
+  return this.date_of_birth ? `${this.date_of_birth.getFullYear()}-${String(this.date_of_birth.getMonth() + 1).padStart(2, '0')}-${String(this.date_of_birth.getDate()).padStart(2, '0')}` : '';
+});
+
+AuthorSchema.virtual('date_of_death_yyyy_mm_dd').get(function () {
+  return this.date_of_death ? `${this.date_of_death.getFullYear()}-${String(this.date_of_death.getMonth() + 1).padStart(2, '0')}-${String(this.date_of_death.getDate()).padStart(2, '0')}` : '';
+});
+
 AuthorSchema.virtual('lifespan').get(function () {
   const birth = this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : '';
   const death = this.date_of_death ? DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED) : '';
-  return `${birth} - ${death}`
+  return `${birth} - ${death}`;
 }); 
 
 // Export model
